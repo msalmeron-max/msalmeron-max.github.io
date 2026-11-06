@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Cocinero | TP Integrador TI - Tecnología e Innovación</title>
+  <meta name="description" content="Proyecto de robótica educativa con BBC micro:bit: Robot Cocinero para sensibilizar y fomentar hábitos de alimentación saludable en niños.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar" id="main-navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" id="brand-logo-link">
+        <div class="brand-icon">🤖</div>
+        <div class="brand-text">
+          <span class="brand-title">Robot Cocinero</span>
+          <span class="brand-subtitle">TP Integrador TI • Micro:bit V2</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Inicio</a></li>
+          <li><a href="#problematica" class="nav-link">Problemática</a></li>
+          <li><a href="#solucion" class="nav-link">Solución</a></li>
+          <li><a href="#funcionamiento" class="nav-link">¿Cómo Funciona?</a></li>
+          <li><a href="#sensores" class="nav-link">Sensores y Actuadores</a></li>
+          <li><a href="#codigo" class="nav-link">Código</a></li>
+          <li><a href="#simulador" class="nav-link">Simulador</a></li>
+          <li><a href="#redaccion" class="nav-link highlight">Espacio de Redacción</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Modo Edición en vivo toggle -->
+        <button id="toggle-edit-mode-btn" class="btn btn-secondary btn-sm" title="Activar/Desactivar edición de textos en pantalla">
+          <span class="edit-icon">✏️</span>
+          <span class="edit-label">Modo Edición</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="toggle-theme-btn" class="theme-toggle-btn" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+          <span class="theme-icon">🌙</span>
+        </button>
+
+        <!-- Mobile hamburger -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú de navegación">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner de aviso Modo Edición -->
+  <div id="edit-mode-banner" class="edit-mode-banner hidden">
+    <div class="banner-inner">
+      <span>✏️ <strong>Modo Edición Activado:</strong> Haz clic en cualquier recuadro con borde punteado para escribir el texto de tu grupo. Los cambios se guardan automáticamente.</span>
+      <div class="banner-btns">
+        <button id="save-content-btn" class="btn btn-xs btn-primary">💾 Guardar Cambios</button>
+        <button id="reset-default-btn" class="btn btn-xs btn-outline">Restaurar Ejemplo</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ================= HERO SECTION (Slide 1 y Slide 3) ================= -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        
+        <div class="hero-content">
+          <!-- Call to action speech bubble badge (Slide 1 & Slide 3) -->
+          <div class="speech-bubble-badge" id="hero-speech-badge">
+            <span class="bubble-tail"></span>
+            <span class="bubble-icon">💬</span>
+            <span class="bubble-text">¡Call to Action: Aprender a comer sano nunca fue tan divertido!</span>
+          </div>
+
+          <h1 class="hero-title">
+            ROBOT COCINERO
+            <span class="gradient-text">TECNOLOGÍA AL SERVICIO DE LA SALUD INFANTIL</span>
+          </h1>
+
+          <p class="hero-description editable-field" id="hero-desc-text" data-key="hero_desc">
+            Un proyecto integrador escolar de robótica con BBC micro:bit diseñado para sensibilizar, acompañar y transformar los hábitos alimenticios en niños mediante interacción lúdica y gamificación a la hora de comer.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#problematica" class="btn btn-primary btn-lg" id="btn-hero-problem">
+              <span>Descubrir la Problemática</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#simulador" class="btn btn-outline btn-lg" id="btn-hero-sim">
+              <span>Probar Simulador Micro:bit</span>
+              <span class="badge-tag">En Vivo</span>
+            </a>
+            <button id="print-report-btn" class="btn btn-secondary btn-lg" title="Imprimir o guardar como PDF este trabajo">
+              <span>📄 Imprimir Informe TP</span>
+            </button>
+          </div>
+
+          <!-- Quick project info pill list -->
+          <div class="hero-meta-grid">
+            <div class="meta-item">
+              <span class="meta-num">V2.0</span>
+              <span class="meta-label">Versión Prototipo</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-num">5x5</span>
+              <span class="meta-label">Matriz LED Emocional</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-num">100%</span>
+              <span class="meta-label">Materiales Sostenibles</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-num">STEM</span>
+              <span class="meta-label">Enfoque Educativo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Presentation Image (Slide 3: "ES LA IMAGEN PRESENTACIÓN, TIENE QUE SER LA + GRANDE") -->
+        <div class="hero-media-wrapper">
+          <div class="hero-card-frame">
+            <div class="hero-image-glow"></div>
+            <img 
+              src="hero_robot_kid.jpg" 
+              alt="Niña compartiendo merienda saludable con el Robot Cocinero micro:bit" 
+              class="hero-main-img" 
+              id="hero-presentation-image"
+            >
+            <div class="hero-badge-overlay">
+              <span class="badge-icon">⭐</span>
+              <div class="badge-content">
+                <strong>Prototipo Funcional en Acción</strong>
+                <small>Fomentando frutas y verduras con micro:bit</small>
+              </div>
+            </div>
+          </div>
+          <div class="hero-caption">
+            <span class="caption-tag">Slide 3 • Imagen Principal de Presentación</span>
+            <p>La interacción lúdica entre el niño y el robot convierte el hábito de comer sano en un momento de alegría y descubrimiento.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: NUESTRA PROBLEMÁTICA (Slide 1 y Slide 3) ================= -->
+    <section class="section problem-section" id="problematica">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Diagnóstico y Contexto • Slide 1 y 3</div>
+          <h2 class="section-title">Nuestra Problemática Detectada</h2>
+          <p class="section-subtitle">
+            Contexto e información general sobre la problemática elegida, orientada a sensibilizar al usuario y a la comunidad sobre el impacto del problema.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          
+          <!-- Columna izquierda: Textos editables y estadísticas -->
+          <div class="problem-text-column">
+            
+            <div class="card problem-card">
+              <div class="card-header-flex">
+                <span class="card-badge danger">⚠️ Problemática Principal</span>
+                <span class="edit-hint" title="Puedes editar este texto">Clic para editar ✎</span>
+              </div>
+
+              <h3 class="problem-card-title editable-field" id="problem-title" data-key="problem_title">
+                Malnutrición y Obesidad Infantil
+              </h3>
+
+              <div class="editable-field problem-body-text" id="problem-description" data-key="problem_description">
+                <p>
+                  En la actualidad, la <strong>malnutrición y la obesidad infantil</strong> representan una de las mayores crisis de salud en edad escolar. Una alarmante cantidad de niños y niñas enfrentan serias dificultades para incorporar frutas, vegetales y alimentos ricos en nutrientes esenciales a su rutina diaria, sufriendo la paradoja de la malnutrición: deficiencia de micronutrientes vitales (vitaminas, minerales y fibra) combinada con un exceso calórico perjudicial originado por alimentos de bajo valor nutricional.
+                </p>
+                <p>
+                  El consumo acelerado de alimentos, la falta de una masticación pausada y el desplazamiento de las comidas caseras provocan no solo sobrepeso, sino fatiga crónica escolar, falta de concentración en clase, trastornos gastrointestinales y riesgo temprano de enfermedades metabólicas y cardiovasculares.
+                </p>
+                <p>
+                  <strong>Nuestra meta como equipo de Tecnología de la Información:</strong> Diseñar un prototipo robótico interactivo con BBC micro:bit que actúe como un compañero educativo en la mesa, transformando la incorporación de nutrientes y la masticación consciente en una experiencia lúdica, visual y motivadora.
+                </p>
+              </div>
+
+              <!-- Estadísticas clave para sensibilizar -->
+              <div class="stats-row">
+                <div class="stat-box">
+                  <div class="stat-number">41.1%</div>
+                  <div class="stat-label">de niños y adolescentes presentan sobrepeso u obesidad en edad escolar</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number">4 de 5</div>
+                  <div class="stat-label">niños no consumen la porción diaria recomendada de frutas y verduras</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number">> 2 hrs</div>
+                  <div class="stat-label">promedio de exposición a pantallas durante horarios de almuerzo o cena</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Call to action de sensibilización -->
+            <div class="cta-alert-card">
+              <div class="cta-alert-icon">📢</div>
+              <div class="cta-alert-content">
+                <h4 class="editable-field" id="problem-cta-title" data-key="problem_cta_title">¿Por qué es urgente actuar ante la malnutrición infantil?</h4>
+                <p class="editable-field" id="problem-cta-desc" data-key="problem_cta_desc">
+                  Los hábitos consolidados durante los primeros años de vida definen la salud adulta. Si comer sano se percibe como una imposición o castigo, el rechazo persiste. Por eso transformamos el momento de alimentarse en un juego donde el robot es un amigo motivador que celebra cada elección saludable.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Columna derecha: Imagen del niño con su médico nutricionista (Slide 3) -->
+          <div class="problem-media-column">
+            <div class="media-card-styled">
+              <div class="media-container">
+                <img 
+                  src="nutritionist_kid.jpg" 
+                  alt="Niña junto a su madre en consulta con médica nutricionista ante pirámide alimenticia" 
+                  class="styled-img"
+                  id="problem-nutritionist-img"
+                >
+                <span class="media-pill">Slide 3 • Consulta Nutricional</span>
+              </div>
+              <div class="media-details">
+                <h4 class="media-title">Atención Médica y Diagnóstico Preventivo</h4>
+                <p class="media-desc">
+                  La visita a profesionales de la salud refleja la preocupación constante de las familias por lograr que los niños adquieran hábitos nutritivos sostenibles antes de que se presenten patologías.
+                </p>
+                <div class="problem-tags">
+                  <span class="tag">#NutriciónEscolar</span>
+                  <span class="tag">#Prevención</span>
+                  <span class="tag">#SaludInfantil</span>
+                  <span class="tag">#Conciencia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= APARTADO: OTRAS PROBLEMÁTICAS DETECTADAS ================= -->
+        <div class="other-problems-wrapper" id="otras-problematicas">
+          <div class="other-problems-header">
+            <span class="other-problems-badge">Diagnóstico Complementario</span>
+            <h3 class="other-problems-title">Otras problemáticas detectadas</h3>
+            <p class="other-problems-subtitle">
+              Durante la investigación escolar y el relevamiento institucional, identificamos problemáticas y factores asociados que profundizan la vulnerabilidad nutricional en la infancia:
+            </p>
+          </div>
+
+          <div class="other-problems-grid">
+            <!-- Problemática 1: Ultraprocesados -->
+            <div class="other-problem-card">
+              <div class="other-problem-top">
+                <div class="other-problem-icon">🍭</div>
+                <span class="other-problem-tag">Alimentación Inadecuada</span>
+              </div>
+              <div class="other-problem-content">
+                <h4 class="other-problem-name">Exceso de Alimentos Ultraprocesados y Azúcar</h4>
+                <p class="other-problem-desc">
+                  El fácil acceso a golosinas, gaseosas y colaciones industriales desplaza las preparaciones caseras y los alimentos frescos en recreos y meriendas escolares.
+                </p>
+                <div class="other-problem-impact">
+                  <strong>Impacto directo:</strong> Alteración del paladar infantil, riesgo temprano de caries, dependencia de azúcares refinados y aporte excesivo de calorías vacías sin vitaminas ni minerales.
+                </div>
+                <div class="other-problem-action">
+                  <button class="preset-btn other-problem-btn" data-preset="ultraprocesados">
+                    <span>Ver análisis en panel</span> →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Problemática 2: Pantallas y Distracción -->
+            <div class="other-problem-card">
+              <div class="other-problem-top">
+                <div class="other-problem-icon">📱</div>
+                <span class="other-problem-tag">Distracción Digital</span>
+              </div>
+              <div class="other-problem-content">
+                <h4 class="other-problem-name">Sedentarismo y Comida frente a Pantallas</h4>
+                <p class="other-problem-desc">
+                  Comer mirando teléfonos celulares, videojuegos o televisión bloquea la percepción de las señales biológicas de saciedad y propicia una ingesta pasiva, involuntaria y desmedida.
+                </p>
+                <div class="other-problem-impact">
+                  <strong>Impacto directo:</strong> Se consume hasta un 30% más de comida chatarra sin registro consciente, se pierde el diálogo familiar en la mesa y se debilita la digestión.
+                </div>
+                <div class="other-problem-action">
+                  <button class="preset-btn other-problem-btn" data-preset="pantallas">
+                    <span>Ver análisis en panel</span> →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Problemática 3: Masticación rápida -->
+            <div class="other-problem-card">
+              <div class="other-problem-top">
+                <div class="other-problem-icon">⏱️</div>
+                <span class="other-problem-tag">Digestión y Ritmo</span>
+              </div>
+              <div class="other-problem-content">
+                <h4 class="other-problem-name">Comer Apresurado y Falta de Masticación</h4>
+                <p class="other-problem-desc">
+                  El apuro y la falta de pausas entre bocados hacen que los niños traguen sin triturar adecuadamente los alimentos, impidiendo que el sistema digestivo y el cerebro coordinen los tiempos de saciedad.
+                </p>
+                <div class="other-problem-impact">
+                  <strong>Impacto directo:</strong> Pesadez estomacal, menor asimilación de micronutrientes esenciales y mayor probabilidad de atracones o ansiedad alimentaria.
+                </div>
+                <div class="other-problem-action">
+                  <button class="preset-btn other-problem-btn" data-preset="nutricion">
+                    <span>Volver a Problemática Principal</span> 🍎
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Problemática 4: Falta de herramientas lúdicas -->
+            <div class="other-problem-card">
+              <div class="other-problem-top">
+                <div class="other-problem-icon">🎮</div>
+                <span class="other-problem-tag">Pedagogía y Motivación</span>
+              </div>
+              <div class="other-problem-content">
+                <h4 class="other-problem-name">Ausencia de Estímulos Lúdicos y Gamificación</h4>
+                <p class="other-problem-desc">
+                  Presentar la comida sana como una imposición o castigo genera desinterés y rechazo. La carencia de herramientas tecnológicas y dinámicas interactivas dificulta enseñar nutrición de forma divertida.
+                </p>
+                <div class="other-problem-impact">
+                  <strong>Impacto directo:</strong> Rechazo continuo hacia verduras, frutas y legumbres, transformando la hora de comer en un momento de tensión en vez de disfrute.
+                </div>
+                <div class="other-problem-action">
+                  <button class="preset-btn other-problem-btn" data-preset="personalizada">
+                    <span>✏️ Redactar caso propio</span> →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: NUESTRA SOLUCIÓN (Slide 1 y Slide 4) ================= -->
+    <section class="section solution-section" id="solucion">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Propuesta Innovadora • Slide 1 y 4</div>
+          <h2 class="section-title">Nuestra Solución: Robot Cocinero</h2>
+          <p class="section-subtitle">
+            Presentación del robot como respuesta directa a la problemática, explicando su funcionamiento, diseño pedagógico y caso de uso cotidiano.
+          </p>
+        </div>
+
+        <div class="solution-grid">
+          
+          <!-- Columna izquierda: Niña mostrando el robot (Slide 4) -->
+          <div class="solution-media-column">
+            <div class="media-card-styled highlight-card">
+              <div class="media-container">
+                <img 
+                  src="girl_showing_robot.jpg" 
+                  alt="Alumna presentando con orgullo el prototipo Chef Robot V2.0 en la Feria de Ciencias" 
+                  class="styled-img"
+                  id="solution-girl-robot-img"
+                >
+                <span class="media-pill success">Slide 4 • Feria de Innovación</span>
+              </div>
+              <div class="media-details">
+                <h4 class="media-title">Presentación en Feria de Ciencias (STEM)</h4>
+                <p class="media-desc">
+                  El robot "Chef Robot V2.0" fue construido con materiales reciclados, madera y electrónica accesible con BBC micro:bit, demostrando que la tecnología escolar puede solucionar problemáticas reales de la vida cotidiana.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Explicación de la Solución (Slide 4) -->
+          <div class="solution-text-column">
+            
+            <div class="card solution-card">
+              <div class="card-header-flex">
+                <span class="card-badge success">✨ La Solución Tecnológica</span>
+                <span class="edit-hint">Clic para editar ✎</span>
+              </div>
+
+              <h3 class="solution-card-title editable-field" id="solution-title" data-key="solution_title">
+                Un Asistente de Cocina que Gamifica y Premia los Buenos Hábitos
+              </h3>
+
+              <div class="editable-field solution-body-text" id="solution-description" data-key="solution_description">
+                <p>
+                  Para resolver el rechazo a la comida saludable y las distracciones a la hora de comer, desarrollamos el <strong>Robot Cocinero</strong>. Este dispositivo interactúa de forma cálida y divertida con el niño mientras está en la mesa.
+                </p>
+                <p>
+                  A través de estímulos visuales (su matriz de 25 LEDs con expresiones de chef), melodías alegres y un sistema de premios interactivos, el robot felicita cuando se come despacio, recuerda beber agua y motiva a probar nuevos vegetales con su frase distintiva <em>"¡A COMER!"</em>.
+                </p>
+              </div>
+
+              <!-- Puntos claves de la solución -->
+              <div class="solution-features-list">
+                
+                <div class="feature-item">
+                  <div class="feature-icon bg-orange">🎯</div>
+                  <div class="feature-content">
+                    <h5>Comer sin Prisas (Temporizador Amigable)</h5>
+                    <p>Guía al niño con pausas visuales para evitar atracones y fomentar una digestión óptima mediante masticación pausada.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon bg-green">🥦</div>
+                  <div class="feature-content">
+                    <h5>Refuerzo Positivo al Probar Verduras</h5>
+                    <p>Al pulsar el botón de comida nutritiva, el robot muestra una gran sonrisa animada y una melodía triunfal de felicitación.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon bg-blue">🌱</div>
+                  <div class="feature-content">
+                    <h5>Diseño Empático y Ecológico</h5>
+                    <p>Carcasa construida en madera con gorro de chef, cubiertos de madera articulados y microcontrolador seguro de bajo voltaje.</p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: ¿CÓMO FUNCIONA? Y TECNOLOGÍA (Slide 2 y Slide 4) ================= -->
+    <section class="section tech-section" id="funcionamiento">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Ingeniería y Funcionamiento • Slide 2 y 4</div>
+          <h2 class="section-title">¿Cómo Funciona el Robot Cocinero?</h2>
+          <p class="section-subtitle">
+            Flujo paso a paso desde que el niño se sienta a la mesa hasta que finaliza su comida saludable.
+          </p>
+        </div>
+
+        <div class="workflow-steps">
+          
+          <div class="step-card">
+            <div class="step-badge">Paso 1</div>
+            <div class="step-icon">🥣</div>
+            <h4 class="step-title">Bienvenida al Plato</h4>
+            <p class="step-desc editable-field" id="step1-desc" data-key="step1_desc">
+              Al encender el robot, su matriz LED dibuja una sonrisa y enciende el LED rojo superior del gorro para indicar que el servicio de cocina está listo.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">Paso 2</div>
+            <div class="step-icon">🍽️</div>
+            <h4 class="step-title">Selección y Registro</h4>
+            <p class="step-desc editable-field" id="step2-desc" data-key="step2_desc">
+              El niño pulsa el botón A para registrar que está comiendo alimentos saludables (frutas o ensalada). El robot muestra una manzana o corazón en pantalla.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">Paso 3</div>
+            <div class="step-icon">⏳</div>
+            <h4 class="step-title">Ritmo de Masticación</h4>
+            <p class="step-desc editable-field" id="step3-desc" data-key="step3_desc">
+              El botón B activa el ritmo de descanso. El micro:bit realiza una cuenta regresiva que invita al niño a masticar con calma antes del siguiente bocado.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">Paso 4</div>
+            <div class="step-icon">🏆</div>
+            <h4 class="step-title">Recompensa y Alegría</h4>
+            <p class="step-desc editable-field" id="step4-desc" data-key="step4_desc">
+              Al terminar la comida nutritiva, al presionar A+B el robot reproduce una fanfarria musical ("ba-ding") y mueve sus cubiertos de madera celebrando el logro.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: SENSORES Y ACTUADORES (Slide 2) ================= -->
+    <section class="section sensors-section" id="sensores">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Electrónica y Hardware • Slide 2</div>
+          <h2 class="section-title">Sensores y Actuadores del Robot</h2>
+          <p class="section-subtitle">
+            Diferenciación clara entre los componentes que captan información del entorno (sensores) y los que producen una acción o respuesta visible/sonora (actuadores).
+          </p>
+        </div>
+
+        <!-- Barra de filtro interactivo Sensores / Actuadores -->
+        <div class="sensors-filter-bar">
+          <button class="sensor-filter-btn active" data-filter="all">🔍 Ver Todos los Componentes</button>
+          <button class="sensor-filter-btn filter-sensor-btn" data-filter="sensor">🔵 Solo Sensores (Entradas)</button>
+          <button class="sensor-filter-btn filter-actuator-btn" data-filter="actuator">🔴 Solo Actuadores (Salidas)</button>
+        </div>
+
+        <div class="sensors-layout">
+          
+          <!-- Lista de componentes dividida claramente en Sensores y Actuadores -->
+          <div class="sensors-columns-container">
+            
+            <!-- Bloque de Sensores (Entradas) -->
+            <div class="sensor-group-block" data-category="sensor">
+              <div class="group-header blue-theme">
+                <span class="group-icon">📥</span>
+                <div>
+                  <h4 class="group-title">SENSORES (Entradas / Inputs)</h4>
+                  <p class="group-subtitle">Captan datos del usuario y del entorno para enviar al micro:bit</p>
+                </div>
+              </div>
+
+              <div class="sensors-grid-grouped">
+                
+                <div class="sensor-card item-sensor">
+                  <div class="sensor-icon-circle bg-amber">
+                    <span>🔘</span>
+                  </div>
+                  <div class="sensor-info">
+                    <span class="component-category tag-sensor">Sensor Táctil • Entrada Digital</span>
+                    <h4 class="sensor-name">Botones Físicos A y B</h4>
+                    <p class="sensor-detail editable-field" id="sensor-buttons" data-key="sensor_buttons">
+                      Pulsadores integrados en la placa. El Botón A registra que el niño comió verduras o frutas y el Botón B activa el ritmo de masticación pausada.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="sensor-card item-sensor">
+                  <div class="sensor-icon-circle bg-blue">
+                    <span>☀️</span>
+                  </div>
+                  <div class="sensor-info">
+                    <span class="component-category tag-sensor">Sensor Óptico • Entrada Analógica</span>
+                    <h4 class="sensor-name">Sensor de Luz Ambiental</h4>
+                    <p class="sensor-detail editable-field" id="sensor-light" data-key="sensor_light">
+                      La matriz LED actúa como sensor inverso de iluminación para reconocer si es hora del almuerzo (luz solar) o de la cena (luz tenue).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="sensor-card item-sensor">
+                  <div class="sensor-icon-circle bg-cyan">
+                    <span>🎤</span>
+                  </div>
+                  <div class="sensor-info">
+                    <span class="component-category tag-sensor">Sensor Acústico • Entrada de Sonido</span>
+                    <h4 class="sensor-name">Micrófono Integrado V2</h4>
+                    <p class="sensor-detail editable-field" id="sensor-mic" data-key="sensor_mic">
+                      Monitorea el nivel de ruido ambiental en el comedor o aula para promover un momento de comida tranquilo y libre de distracciones.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Bloque de Actuadores (Salidas) -->
+            <div class="sensor-group-block" data-category="actuator">
+              <div class="group-header red-theme">
+                <span class="group-icon">📤</span>
+                <div>
+                  <h4 class="group-title">ACTUADORES (Salidas / Outputs)</h4>
+                  <p class="group-subtitle">Ejecutan acciones físicas: emiten luz, sonidos y movimiento</p>
+                </div>
+              </div>
+
+              <div class="sensors-grid-grouped">
+                
+                <div class="sensor-card item-actuator">
+                  <div class="sensor-icon-circle bg-orange">
+                    <span>🔴</span>
+                  </div>
+                  <div class="sensor-info">
+                    <span class="component-category tag-actuator">Actuador Lumínico • Salida Digital P0</span>
+                    <h4 class="sensor-name">Diodo LED Rojo en Protoboard</h4>
+                    <p class="sensor-detail editable-field" id="sensor-external-led" data-key="sensor_external_led">
+                      LED exterior ultrabrillante montado en la protoboard con resistencia de 220Ω, conectado al pin P0. Se sitúa en el gorro del chef para señalar alertas o inicio del servicio.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="sensor-card item-actuator">
+                  <div class="sensor-icon-circle bg-red">
+                    <span>💡</span>
+                  </div>
+                  <div class="sensor-info">
+                    <span class="component-category tag-actuator">Actuador Visual • Matriz Digital</span>
+                    <h4 class="sensor-name">Matriz 5x5 de LEDs Rojos</h4>
+                    <p class="sensor-detail editable-field" id="sensor-matrix" data-key="sensor_matrix">
+                      25 diodos que proyectan expresiones empáticas (caritas felices, corazones), números de cuenta regresiva (3..2..1) y el texto "¡A COMER!".
+                    </p>
+                  </div>
+                </div>
+
+                <div class="sensor-card item-actuator">
+                  <div class="sensor-icon-circle bg-green">
+                    <span>🔊</span>
+                  </div>
+                  <div class="sensor-info">
+                    <span class="component-category tag-actuator">Actuador Sonoro • Frecuencias</span>
+                    <h4 class="sensor-name">Buzzer / Altavoz Piezoeléctrico</h4>
+                    <p class="sensor-detail editable-field" id="sensor-speaker" data-key="sensor_speaker">
+                      Genera vibraciones audibles que reproducen melodías de festejo ("ba-ding") cuando el niño come sus vegetales y pitidos de ritmo de masticación.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Placa Controladora Central -->
+            <div class="sensor-card brain-card" data-category="controller">
+              <div class="sensor-icon-circle bg-purple">
+                <span>🧠</span>
+              </div>
+              <div class="sensor-info">
+                <span class="component-category tag-brain">Unidad Central de Procesamiento</span>
+                <h4 class="sensor-name">BBC micro:bit V2 + Shield Keyestudio</h4>
+                <p class="sensor-detail editable-field" id="sensor-microbit" data-key="sensor_microbit">
+                  El "cerebro" del robot: recibe las señales de los sensores (entradas), ejecuta el código y activa los actuadores (salidas) a través de la tarjeta de expansión keyestudio y cables puente (jumpers).
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Imagen destacada del circuito con anotaciones interactivas -->
+          <div class="circuit-showcase-wrapper">
+            <div class="circuit-highlight-box">
+              <div class="circuit-img-wrap">
+                <img 
+                  src="circuito_sensores_actuadores.jpg" 
+                  alt="Circuito electrónico real del Robot Cocinero: micro:bit V2 conectado a protoboard con LED rojo y shield keyestudio" 
+                  class="circuit-real-img"
+                  id="circuit-main-photo"
+                >
+                <div class="circuit-pill">✨ Ensayo de Sensores y Actuadores</div>
+
+                <!-- Botón para alternar foto mejorada / original -->
+                <button class="toggle-photo-mode-btn" id="toggle-circuit-photo-btn" title="Alternar entre foto mejorada y foto original">
+                  🔄 Ver Foto Original
+                </button>
+
+                <!-- Hotspots / Etiquetas sobre la imagen -->
+                <div class="circuit-hotspot hotspot-actuator-led" title="Actuador: Diodo LED rojo en protoboard">
+                  <span class="hotspot-dot red"></span>
+                  <span class="hotspot-label">🔴 Actuador: LED Rojo</span>
+                </div>
+
+                <div class="circuit-hotspot hotspot-actuator-matrix" title="Actuador: Matriz 5x5 de LEDs">
+                  <span class="hotspot-dot red"></span>
+                  <span class="hotspot-label">🔴 Actuador: Matriz 5x5</span>
+                </div>
+
+                <div class="circuit-hotspot hotspot-sensor-buttons" title="Sensores: Botones A y B">
+                  <span class="hotspot-dot blue"></span>
+                  <span class="hotspot-label">🔵 Sensor: Botones A y B</span>
+                </div>
+
+                <div class="circuit-hotspot hotspot-shield" title="Shield Adaptador Keyestudio y Jumpers">
+                  <span class="hotspot-dot purple"></span>
+                  <span class="hotspot-label">⚡ Shield Keyestudio</span>
+                </div>
+              </div>
+
+              <div class="circuit-caption">
+                <h5>Banco de Ensayos: Circuito Físico del Prototipo</h5>
+                <p>
+                  Fotografía del conexionado real en protoboard utilizando la tarjeta de expansión Keyestudio para derivar pines del micro:bit. Los cables jumpers (rojo y blanco) comunican la salida digital <strong>P0</strong> con el <strong>LED rojo actuador</strong>, protegido por una resistencia de 220 ohmios.
+                </p>
+                <div class="circuit-legend">
+                  <span class="legend-item"><span class="legend-dot blue"></span> <strong>Sensores (Entradas):</strong> Botones A y B, Sensor de Luz, Micrófono</span>
+                  <span class="legend-item"><span class="legend-dot red"></span> <strong>Actuadores (Salidas):</strong> LED rojo en protoboard, Matriz LED 5x5, Altavoz/Buzzer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: PROGRAMACIÓN Y CÓDIGO (Slide 4) ================= -->
+    <section class="section code-section" id="codigo">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Software y Lógica • Slide 4</div>
+          <h2 class="section-title">Programación y Algoritmos</h2>
+          <p class="section-subtitle">
+            El código fue programado en Microsoft MakeCode mediante bloques visuales y traducido a MicroPython para su ejecución en la placa.
+          </p>
+        </div>
+
+        <div class="code-showcase-grid">
+          
+          <!-- Imagen de los bloques MakeCode (Slide 4: Foto del Código) -->
+          <div class="makecode-image-card">
+            <div class="card-top-bar">
+              <div class="window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="bar-title">Microsoft MakeCode • Bloques Oficiales del Robot</span>
+              <button class="toggle-code-photo-btn" id="toggle-code-photo-btn" title="Comparar con el borrador original">
+                🔄 Ver Borrador Original
+              </button>
+            </div>
+            
+            <div class="makecode-img-container">
+              <img 
+                src="code_blocks.jpg" 
+                alt="Bloques de código de Microsoft MakeCode del Robot Cocinero: puntos, alarma_activa, Pin P0 y melodías" 
+                class="makecode-screenshot"
+                id="makecode-code-img"
+              >
+            </div>
+            
+            <div class="makecode-footer-info">
+              <div class="block-tag-list">
+                <span class="block-badge on-start">al iniciar</span>
+                <span class="block-badge forever">por siempre (60s)</span>
+                <span class="block-badge button-a">botón A (alimento)</span>
+                <span class="block-badge button-b">botón B (puntos)</span>
+                <span class="block-badge logo">logo táctil</span>
+              </div>
+              <p>
+                Programación que integra la variable <code>puntos</code>, la bandera de control <code>alarma_activa</code>, la salida digital al <strong>Pin P0</strong> (LED exterior en gorro/protoboard) y los mensajes motivacionales <strong>"¡A COMER!"</strong> y <strong>"Tu puedes!"</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Visor de código interactivo con tabs -->
+          <div class="code-interactive-card">
+            
+            <div class="code-tabs-nav">
+              <button class="code-tab-btn active" data-tab="blocks-desc">Lógica de Bloques</button>
+              <button class="code-tab-btn" data-tab="python">MicroPython</button>
+              <button class="code-tab-btn" data-tab="javascript">JavaScript</button>
+              <button class="copy-code-btn" id="copy-code-btn" title="Copiar código al portapapeles">📋 Copiar</button>
+            </div>
+
+            <!-- Tab 1: Descripción de bloques -->
+            <div class="code-tab-pane active" id="tab-blocks-desc">
+              <div class="blocks-explanation">
+                <div class="block-explain-item">
+                  <div class="block-color-bar purple"></div>
+                  <div>
+                    <h6>1. Bloque "al iniciar" (On Start)</h6>
+                    <p>Muestra el ícono <code>HAPPY</code> de chef, inicializa <code>puntos = 0</code>, establece <code>alarma_activa = false</code> y asegura que el LED externo esté apagado (<code>digital write pin P0 to 0</code>).</p>
+                  </div>
+                </div>
+
+                <div class="block-explain-item">
+                  <div class="block-color-bar blue"></div>
+                  <div>
+                    <h6>2. Bloque "por siempre" (Temporizador de comida)</h6>
+                    <p>Espera un intervalo de tiempo (<code>pause 60000 ms</code>). Activa <code>alarma_activa = true</code> y ejecuta un bucle que enciende el <strong>LED rojo en Pin P0</strong>, proyecta el ícono de alerta y suena la melodía <code>ba-ding</code> hasta que el niño responda.</p>
+                  </div>
+                </div>
+
+                <div class="block-explain-item">
+                  <div class="block-color-bar pink"></div>
+                  <div>
+                    <h6>3. Evento "al presionar botón A" (Premio Nutritivo)</h6>
+                    <p>Al comer su porción saludable, el niño presiona A: apaga la alarma, suma <code>puntos + 1</code>, apaga el LED rojo, muestra el texto animado <code>"¡A COMER!"</code> y un corazón <code>HEART</code> en pantalla.</p>
+                  </div>
+                </div>
+
+                <div class="block-explain-item">
+                  <div class="block-color-bar green"></div>
+                  <div>
+                    <h6>4. Evento "al presionar botón B" (Marcador de Logros)</h6>
+                    <p>Muestra el número total de <code>puntos</code> alcanzados durante el día y dibuja un tilde de aprobación <code>YES</code> motivador.</p>
+                  </div>
+                </div>
+
+                <div class="block-explain-item">
+                  <div class="block-color-bar teal"></div>
+                  <div>
+                    <h6>5. Evento "al tocar el logo" (Mensaje de Aliento)</h6>
+                    <p>Al tocar el logo superior de la micro:bit, silencia la alarma y proyecta en la pantalla la frase inspiradora <code>"Tu puedes!"</code>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2: Python -->
+            <div class="code-tab-pane" id="tab-python">
+              <pre><code class="language-python"># Robot Cocinero - BBC micro:bit V2
+# Código MakeCode / MicroPython Oficial del Proyecto
+from microbit import *
+import music
+
+puntos = 0
+alarma_activa = False
+pin0.write_digital(0) # LED rojo exterior apagado
+display.show(Image.HAPPY)
+
+# Al presionar Botón A: Registro de alimento saludable
+def on_button_a():
+    global puntos, alarma_activa
+    if alarma_activa:
+        alarma_activa = False
+        puntos += 1
+        pin0.write_digital(0) # Apaga LED de alerta
+        display.scroll("!A COMER!")
+        display.show(Image.HEART)
+        sleep(2000)
+        display.show(Image.HAPPY)
+
+# Al presionar Botón B: Ver puntos acumulados
+def on_button_b():
+    display.show(str(puntos))
+    sleep(2000)
+    display.show(Image.YES) # Tilde de logro
+    sleep(1000)
+    display.show(Image.HAPPY)
+
+# Al tocar el Logo táctil de la micro:bit: Mensaje motivacional
+def on_logo_touch():
+    pin0.write_digital(0)
+    display.scroll("Tu puedes!")
+    display.show(Image.HAPPY)
+
+# Bucle principal de recordatorio de comidas
+while True:
+    display.show(Image.HAPPY)
+    sleep(60000) # Temporizador de 1 minuto entre descansos
+    alarma_activa = True
+    
+    # Ciclo de alarma mientras el niño no responda
+    while alarma_activa:
+        pin0.write_digital(1) # Enciende LED de chef en protoboard
+        display.show(Image.ASLEEP)
+        music.play(music.BA_DING)
+        sleep(1000)</code></pre>
+            </div>
+
+            <!-- Tab 3: JavaScript -->
+            <div class="code-tab-pane" id="tab-javascript">
+              <pre><code class="language-javascript">// Robot Cocinero - Microsoft MakeCode JavaScript
+let puntos = 0
+let alarma_activa = false
+pins.digitalWritePin(DigitalPin.P0, 0)
+basic.showIcon(IconNames.Happy)
+
+// Evento: Al presionar Botón A (Alimento nutritivo consumido)
+input.onButtonPressed(Button.A, function () {
+    if (alarma_activa) {
+        alarma_activa = false
+        puntos += 1
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        basic.showString("!A COMER!")
+        basic.showIcon(IconNames.Heart)
+        basic.pause(2000)
+        basic.clearScreen()
+    }
+})
+
+// Evento: Al presionar Botón B (Ver puntos ganados)
+input.onButtonPressed(Button.B, function () {
+    basic.showNumber(puntos)
+    basic.pause(2000)
+    basic.showIcon(IconNames.Yes)
+    basic.pause(1000)
+    basic.clearScreen()
+})
+
+// Evento: Al tocar el logo frontal
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    pins.digitalWritePin(DigitalPin.P0, 0)
+    basic.showString("Tu puedes!")
+    basic.pause(2000)
+    basic.clearScreen()
+})
+
+// Bucle en segundo plano: Alarma y temporizador de ritmo
+basic.forever(function () {
+    basic.showIcon(IconNames.Happy)
+    basic.pause(60000)
+    alarma_activa = true
+    while (alarma_activa) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        basic.showIcon(IconNames.No)
+        music.playMelody("C5 G B A F A C5 B ", 120)
+    }
+})</code></pre>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: SIMULADOR INTERACTIVO DEL ROBOT ================= -->
+    <section class="section simulator-section" id="simulador">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Demostración en Vivo</div>
+          <h2 class="section-title">Simulador Virtual del Robot Cocinero</h2>
+          <p class="section-subtitle">
+            ¡Prueba los botones del robot directamente desde tu navegador y observa cómo responde la pantalla LED y el sonido!
+          </p>
+        </div>
+
+        <div class="simulator-wrapper">
+          
+          <!-- El Micro:bit Virtual con gorro de chef -->
+          <div class="virtual-robot-device">
+            
+            <!-- Gorro de chef -->
+            <div class="robot-chef-hat">
+              <div class="hat-puff"></div>
+              <div class="hat-puff-left"></div>
+              <div class="hat-puff-right"></div>
+              <div class="hat-band">
+                <span class="hat-light" id="sim-chef-led" title="LED indicador de estado"></span>
+              </div>
+            </div>
+
+            <!-- Cuerpo micro:bit -->
+            <div class="sim-microbit-board">
+              
+              <!-- Barra superior con logo microbit y antena -->
+              <div class="mb-top-bar">
+                <div class="mb-logo">micro:bit</div>
+                <div class="mb-mic-badge">🎤 MIC</div>
+              </div>
+
+              <!-- Matriz 5x5 de LEDs -->
+              <div class="mb-center-area">
+                
+                <!-- Botón A -->
+                <button class="mb-physical-btn" id="sim-btn-a" title="Presionar Botón A">
+                  <span class="btn-label">A</span>
+                </button>
+
+                <!-- Pantalla de LEDs 5x5 -->
+                <div class="mb-led-matrix" id="sim-led-matrix" aria-label="Matriz de 25 LEDs de micro:bit">
+                  <!-- 25 LEDs generados dinámicamente -->
+                </div>
+
+                <!-- Botón B -->
+                <button class="mb-physical-btn" id="sim-btn-b" title="Presionar Botón B">
+                  <span class="btn-label">B</span>
+                </button>
+
+              </div>
+
+              <!-- Bigote simpático de chef debajo de la pantalla -->
+              <div class="robot-mustache"></div>
+
+              <!-- Pines inferiores dorados -->
+              <div class="mb-pins-strip">
+                <span class="pin-label">0</span>
+                <span class="pin-label">1</span>
+                <span class="pin-label">2</span>
+                <span class="pin-label">3V</span>
+                <span class="pin-label">GND</span>
+              </div>
+
+              <!-- Letrero inferior de madera "¡A COMER!" -->
+              <div class="robot-wood-base">
+                <span class="cutlery-icon-left">🥄</span>
+                <span class="base-text">¡A COMER!</span>
+                <span class="cutlery-icon-right">🍴</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Panel de control del simulador -->
+          <div class="simulator-controls">
+            
+            <div class="sim-status-box">
+              <span class="status-indicator"></span>
+              <span class="status-text" id="sim-status-msg">Estado: Esperando interacción con el robot</span>
+            </div>
+
+            <div class="sim-actions-grid">
+              
+              <button class="sim-action-card" id="action-btn-a">
+                <div class="action-icon">🍎</div>
+                <div class="action-info">
+                  <strong>Pulsar Botón A</strong>
+                  <small>Comida sana elegida (Sonrisa + Melodía)</small>
+                </div>
+              </button>
+
+              <button class="sim-action-card" id="action-btn-b">
+                <div class="action-icon">⏱️</div>
+                <div class="action-info">
+                  <strong>Pulsar Botón B</strong>
+                  <small>Temporizador de masticación pausada (3, 2, 1)</small>
+                </div>
+              </button>
+
+              <button class="sim-action-card" id="action-btn-ab">
+                <div class="action-icon">🎉</div>
+                <div class="action-info">
+                  <strong>Pulsar A + B Juntos</strong>
+                  <small>Celebración "¡A COMER!" + Corazón</small>
+                </div>
+              </button>
+
+              <button class="sim-action-card" id="action-btn-sound">
+                <div class="action-icon">🔔</div>
+                <div class="action-info">
+                  <strong>Sonido de Alerta</strong>
+                  <small>Probar buzzer acústico simulado</small>
+                </div>
+              </button>
+
+            </div>
+
+            <!-- Simulación de Sensor de Luz -->
+            <div class="sim-slider-box">
+              <div class="slider-header">
+                <label for="sim-light-slider"><strong>Sensor de Luz Ambiental:</strong></label>
+                <span id="light-val-display" class="slider-val">75% (Día)</span>
+              </div>
+              <input type="range" id="sim-light-slider" min="0" max="100" value="75" class="styled-slider">
+              <small class="slider-hint">Si bajas la luz por debajo del 30% (noche), el LED del gorro se encenderá automáticamente.</small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECCIÓN: ESPACIO DE REDACCIÓN (Personalización del Equipo) ================= -->
+    <section class="section writing-section" id="redaccion">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Espacio de Trabajo del Equipo</div>
+          <h2 class="section-title">Panel de Redacción del TP Integrador</h2>
+          <p class="section-subtitle">
+            Aquí tu grupo puede redactar y ajustar los textos exactos de su problemática, la fundamentación teórica, los integrantes del proyecto y las conclusiones.
+          </p>
+        </div>
+
+        <div class="writing-card-container">
+          
+          <form id="project-editor-form" class="editor-form">
+            
+            <div class="form-row two-cols">
+              <div class="form-group">
+                <label for="input-team-names">👥 Integrantes del Grupo:</label>
+                <input type="text" id="input-team-names" class="form-control" placeholder="Ej: Sofía Valentina Pérez, Lucas Gómez, Martina Rodríguez..." value="Grupo de Innovación Robótica - 4to Año">
+              </div>
+
+              <div class="form-group">
+                <label for="input-subject-name">🏫 Materia / Asignatura:</label>
+                <input type="text" id="input-subject-name" class="form-control" placeholder="Ej: Tecnología de la Información / Robótica Educativa" value="Tecnología de la Información (TI)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-problem-topic">🎯 Nombre o Título de la Problemática Elegida:</label>
+              <input type="text" id="input-problem-topic" class="form-control" placeholder="Ej: Hábitos Nutricionales Inadecuados en Niños de Nivel Primario" value="Alimentación Infantil Saludable y Hábitos Nutricionales en la Escuela">
+            </div>
+
+            <div class="form-group">
+              <label for="input-problem-detail">📝 Redacción de la Problemática (Contexto, Impacto y Causas):</label>
+              <textarea id="input-problem-detail" rows="4" class="form-control" placeholder="Escribe aquí el contexto de la problemática que investigó tu equipo...">La falta de motivación en niños para ingerir verduras y frutas, sumada a la velocidad excesiva al comer y el consumo masivo de snacks ultraprocesados, perjudica el bienestar general y el rendimiento escolar. Es necesario un enfoque pedagógico que vincule la tecnología con el juego.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="input-robot-detail">🤖 Redacción de la Solución (Cómo ayuda el Robot Cocinero):</label>
+              <textarea id="input-robot-detail" rows="4" class="form-control" placeholder="Explica cómo el robot que construyeron resuelve la problemática...">El Robot Cocinero acompaña las comidas como un asistente alegre programado con micro:bit. Emplea estímulos lumínicos y auditivos para recompensar el consumo de alimentos naturales y guía tiempos de masticación pausados para una digestión saludable.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="input-conclusions">💡 Conclusiones y Aprendizajes del Proyecto:</label>
+              <textarea id="input-conclusions" rows="3" class="form-control" placeholder="¿Qué aprendieron construyendo y programando el robot?...">El desarrollo de este TP integrador nos permitió aplicar conceptos de algoritmos, programación por bloques, electrónica básica y diseño sustentable en madera, demostrando que la tecnología tiene un fin humano y social.</textarea>
+            </div>
+
+            <div class="form-actions-bar">
+              <button type="button" id="btn-apply-to-page" class="btn btn-primary">
+                <span>🔄 Aplicar Textos a la Página Web</span>
+              </button>
+              <button type="button" id="btn-save-draft" class="btn btn-secondary">
+                <span>💾 Guardar en Navegador</span>
+              </button>
+              <button type="button" id="btn-download-json" class="btn btn-outline">
+                <span>📥 Descargar Resumen (.TXT)</span>
+              </button>
+              <button type="button" id="btn-print-view" class="btn btn-accent">
+                <span>🖨️ Vista Imprimible para Entregar</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER (Slide 1 y Slide 2) ================= -->
+  <footer class="main-footer" id="main-footer">
+    <div class="container footer-container">
+      
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-flex">
+            <span class="footer-robot-emoji">🤖</span>
+            <div>
+              <h3 class="footer-title">Robot Cocinero</h3>
+              <p class="footer-subtitle">TP Integrador de Tecnología de la Información</p>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Proyecto educativo que combina hardware libre (BBC micro:bit), diseño ecológico y hábitos de vida saludable para la comunidad escolar.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h5 class="footer-col-title">Secciones de la Presentación</h5>
+          <ul class="footer-list">
+            <li><a href="#hero">1. Inicio & Presentación (Slide 3)</a></li>
+            <li><a href="#problematica">2. Nuestra Problemática (Slide 1 & 3)</a></li>
+            <li><a href="#solucion">3. Nuestra Solución - Robot (Slide 1 & 4)</a></li>
+            <li><a href="#funcionamiento">4. ¿Cómo Funciona? (Slide 2)</a></li>
+            <li><a href="#sensores">5. Sensores y Actuadores (Slide 2)</a></li>
+            <li><a href="#codigo">6. Programación MakeCode (Slide 4)</a></li>
+            <li><a href="#simulador">7. Simulador Interactivo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5 class="footer-col-title">Recursos del Proyecto</h5>
+          <ul class="footer-list">
+            <li><a href="index.html">Página Principal (HTML)</a></li>
+            <li><a href="style.css">Hoja de Estilos (CSS)</a></li>
+            <li><a href="script.js">Lógica e Interactividad (JS)</a></li>
+            <li><a href="code_blocks.jpg">Captura de Bloques MakeCode</a></li>
+            <li><a href="hero_robot_kid.jpg">Foto Principal en Alta Resolución</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>© 2026 Proyecto Robot Cocinero • TP Integrador TI. Todos los derechos reservados.</span>
+        </div>
+        <div class="footer-badges">
+          <span class="badge-pill">BBC micro:bit V2</span>
+          <span class="badge-pill">MakeCode & Python</span>
+          <span class="badge-pill">Alimentación Saludable</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
